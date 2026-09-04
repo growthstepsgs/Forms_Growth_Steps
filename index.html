@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Registration Form</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<div class="bg-orb orb-3"></div>
+  <div class="left-content">
+  
+  <h1 class="left-title">Welcome to <span>Growth Steps</span></h1>
+  <h1 class="left-textt">Agentic AI Workshop
+
+  <p class="left-text">Build with Agentic AI. Learn, Create & Grow with Growth Steps. Register now and start building real-world AI agents.
+
+<p class="visit-link">
+    Visit Growth Steps:
+    <a href="https://growth-steps-full-stack.vercel.app/" target="_blank">
+        Visit Growth Steps 
+    </a>
+</p>
+</div>
+<div class="form-container">
+
+  <div class="form-header">
+    <h2>Let us reach you out</h2>
+    <p class="subtitle">Give us a few details</p>
+  </div>
+
+  <form id="myForm">
+    <div class="field-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your full name" required>
+    </div>
+
+    <div class="field-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" min="1" max="120" placeholder="e.g. 24" required>
+    </div>
+
+    <div class="field-group">
+      <label for="gender">Gender</label>
+      <select id="gender" required>
+        <option value="">Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="10 digit number" required>
+    </div>
+
+    <div class="field-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+    </div>
+
+    <div class="field-group">
+      <label for="profession">Profession</label>
+      <input type="text" id="profession" placeholder="What do you do?" required>
+    </div>
+
+    <button type="submit" id="submitBtn">Submit</button>
+    <p id="message"></p>
+  </form>
+</div>
+
+
+<audio id="bgMusic" loop>
+    <source src="./audio/peaceful.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicToggle" class="music-btn">
+    Music: off
+</button>
+<script>
+const music = document.getElementById("bgMusic");
+const button = document.getElementById("musicToggle");
+
+// Start music automatically
+window.addEventListener("load", async () => {
+    try {
+        music.volume = 1;
+        await music.play();
+
+        // Music is playing, but button starts as "Off"
+        button.textContent = "Music: Off";
+
+    } catch (error) {
+        console.log("Autoplay blocked by browser:", error);
+    }
+});
+
+
+// Button controls music
+button.addEventListener("click", async () => {
+    try {
+        if (music.paused) {
+            music.volume = 0.15;
+            await music.play();
+            button.textContent = "Music: Off";
+        } else {
+            music.pause();
+            button.textContent = "Music: On";
+        }
+    } catch (error) {
+        console.error("Music error:", error);
+    }
+});
+</script>
+<script src="script.js"></script>
+</body>
+</html>
