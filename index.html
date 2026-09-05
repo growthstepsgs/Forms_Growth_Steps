@@ -77,15 +77,16 @@
     <source src="./audio/peaceful.mp3" type="audio/mpeg">
 </audio>
 
-<button id="musicToggle" class="music-btn">Music: On</button>
+<button id="musicToggle" class="music-btn">
+    Music: On
+</button>
 
 <script>
 const music = document.getElementById("bgMusic");
 const button = document.getElementById("musicToggle");
-const VOLUME = 0.7; // adjust this — 0.15 was too low
+const VOLUME = 0.6;
 let unmuted = false;
 
-// Try to start muted playback immediately (always allowed)
 window.addEventListener("load", () => {
     music.volume = VOLUME;
     music.play().catch(err => console.log("Autoplay attempt:", err));
@@ -100,25 +101,23 @@ function unmuteOnInteraction() {
     button.textContent = "Music: On";
 }
 
-// Unmute the instant the user interacts with the page in any way
 ["click", "keydown", "touchstart", "scroll"].forEach(evt =>
     document.addEventListener(evt, unmuteOnInteraction, { once: true })
 );
 
-// Manual toggle button still works independently
 button.addEventListener("click", () => {
     if (music.muted || music.paused) {
         music.muted = false;
         music.volume = VOLUME;
         music.play();
-        button.textContent = "Music: On";
+        button.textContent = "Music: Off";
     } else {
         music.pause();
-        button.textContent = "Music: Off";
+        button.textContent = "Music: On";
     }
 });
 </script>
-</script>
+
 <script src="script.js"></script>
 </body>
 </html>
