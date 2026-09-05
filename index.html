@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registration Form</title>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -74,51 +73,48 @@
 </div>
 
 
-<audio id="bgMusic" loop muted autoplay>
+<audio id="bgMusic" loop>
     <source src="./audio/peaceful.mp3" type="audio/mpeg">
 </audio>
 
 <button id="musicToggle" class="music-btn">
-    Music: On
+    Music: off
 </button>
-
 <script>
 const music = document.getElementById("bgMusic");
 const button = document.getElementById("musicToggle");
-const VOLUME = 0.6;
-let unmuted = false;
 
-window.addEventListener("load", () => {
-    music.volume = VOLUME;
-    music.play().catch(err => console.log("Autoplay attempt:", err));
+// Start music automatically
+window.addEventListener("load", async () => {
+    try {
+        music.volume = 1;
+        await music.play();
+
+        // Music is playing, but button starts as "Off"
+        button.textContent = "Music: Off";
+
+    } catch (error) {
+        console.log("Autoplay blocked by browser:", error);
+    }
 });
 
-function unmuteOnInteraction() {
-    if (unmuted) return;
-    unmuted = true;
-    music.muted = false;
-    music.volume = VOLUME;
-    music.play().catch(err => console.log("Unmute play failed:", err));
-    button.textContent = "Music: On";
-}
 
-["click", "keydown", "touchstart", "scroll"].forEach(evt =>
-    document.addEventListener(evt, unmuteOnInteraction, { once: true })
-);
-
-button.addEventListener("click", () => {
-    if (music.muted || music.paused) {
-        music.muted = false;
-        music.volume = VOLUME;
-        music.play();
-        button.textContent = "Music: Off";
-    } else {
-        music.pause();
-        button.textContent = "Music: On";
+// Button controls music
+button.addEventListener("click", async () => {
+    try {
+        if (music.paused) {
+            music.volume = 0.15;
+            await music.play();
+            button.textContent = "Music: Off";
+        } else {
+            music.pause();
+            button.textContent = "Music: On";
+        }
+    } catch (error) {
+        console.error("Music error:", error);
     }
 });
 </script>
-
 <script src="script.js"></script>
 </body>
 </html>
